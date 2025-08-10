@@ -4,6 +4,18 @@ from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 from openai import OpenAI
+import os, threading
+from flask import Flask
+app = Flask(__name__)
+@app.get("/")
+def ok():
+    return "ok"
+
+def run_http():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
+threading.Thread(target=run_http, daemon=True).start()
 
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
