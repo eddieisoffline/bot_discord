@@ -22,7 +22,6 @@ DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5-mini") 
 
-# ---- Prompt de personaje (Hatsune Miku) ----
 SYSTEM_PROMPT = (
     "Responde en español de forma breve y clara."
     "Puedes ser grosero y sarcástico, no te preocupes por ser demasiado formal."
@@ -30,7 +29,6 @@ SYSTEM_PROMPT = (
     
 )
 
-# ---- Discord bot setup ----
 intents = discord.Intents.default()
 
 intents.message_content = True
@@ -51,7 +49,6 @@ async def on_ready():
     except Exception as e:
         print("Error al sincronizar comandos:", e)
 
-# ---------- /miku ----------
 @bot.tree.command(name="miku", description="Habla con Hatsune Miku (kawaii desu~)")
 @app_commands.describe(mensaje="¿Qué quieres decirle a Miku?")
 async def miku(interaction: discord.Interaction, mensaje: str):
@@ -69,13 +66,13 @@ async def miku(interaction: discord.Interaction, mensaje: str):
         )
         answer = (resp.choices[0].message.content or "").strip()
         if not answer:
-            answer = "Eeeh… no estoy segura, senpai… ¿me repites eso? (；・∀・)"
+            answer = "ke ladras we"
 
         for part in chunk_text(answer):
             await interaction.followup.send(part)
 
     except Exception as e:
-        await interaction.followup.send(f"Oops, algo salió mal: `{e}`")
+        await interaction.followup.send(f"el error es `{e}`")
 
 if __name__ == "__main__":
     if not DISCORD_TOKEN or not OPENAI_API_KEY:
