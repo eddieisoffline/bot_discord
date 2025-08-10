@@ -55,7 +55,6 @@ async def miku(interaction: discord.Interaction, mensaje: str):
     await interaction.response.defer(thinking=True)
 
     try:
-        # Llamada al modelo (Chat Completions)
         resp = client.chat.completions.create(
             model=OPENAI_MODEL,
             temperature=1,
